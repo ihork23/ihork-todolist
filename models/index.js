@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.set('debug', true)
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo-api')
 
 mongoose.Promise = Promise
 
