@@ -7,9 +7,19 @@ exports.getTodos = (req, res) => {
 }
 
 exports.createTodo = (req, res) => {
-  db.Todo.create(req.body)
+  const newTodo = Object.assign(
+    {},
+    req.body,
+    { userId: req.params.id }
+  )
+  db.Todo.create(newTodo)
     .then(newTodo => {
-      res.status(201).json(newTodo)
+      db.User.findById(newTodo.userId).then(user => {
+        user.todos.push(newTodo._id)
+        user.save().then(() => {
+          return res.status(201).json(newTodo)
+        })
+      })
     })
     .catch(err => res.send(err))
 }

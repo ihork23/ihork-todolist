@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.set('debug', true)
-mongoose.connect(process.env.MONGODB_URI || require('../dev.env').mongodbUri)
+mongoose.connect(require('../env').mongodbUri)
 
 mongoose.Promise = Promise
 

@@ -1,6 +1,6 @@
 const db = require('../models')
 const jwt = require('jsonwebtoken')
-const secretKey = process.env.SECRET_KEY || require('../dev.env').secretKey
+const secretKey = require('../env').secretKey
 
 exports.signin = (req, res) => {
   const { email, password } = req.body
