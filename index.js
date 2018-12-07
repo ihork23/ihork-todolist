@@ -17,7 +17,10 @@ app.get('/', (req, res) =>
   res.send('index.html')
 )
 
-app.use('/api/users/:id/todos', auth.loginRequired, todoRoutes)
+app.use('/api/users/:id/todos',
+  auth.loginRequired, auth.ensureCorrectUser,
+  todoRoutes
+)
 app.use('/api/auth', authRoutes)
 app.listen(port, () => {
   console.log('App is running on port', port)

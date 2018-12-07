@@ -19,3 +19,22 @@ exports.loginRequired = (req, res, next) => {
     })
   }
 }
+
+exports.ensureCorrectUser = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1]
+    jwt.verify(token, secretKey, (err, decoded) => {
+      if (decoded && decoded.userId === req.params.id) {
+        next()
+      } else {
+        res.status(401).json({
+          message: 'Unauthorized'
+        })
+      }
+    })
+  } catch (e) {
+    res.status(401).json({
+      message: 'Unauthorized'
+    })
+  }
+}
