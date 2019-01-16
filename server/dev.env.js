@@ -1,5 +1,5 @@
 module.exports = {
   mongodbUri: 'mongodb://localhost/todo-api',
   secretKey: 'secretKey',
-  port: 3000
+  port: 3001
 }
